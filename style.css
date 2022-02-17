@@ -1,0 +1,120 @@
+@font-face {
+    font-family:'BebasNeue-Regular' ;
+    src: url(datas/fonts/BebasNeue-Regular.ttf);
+}
+
+body{
+    background-color: rgb(25, 25, 25);
+    color: white;
+    font-family: 'BebasNeue-Regular';
+    display: flex;
+    flex-direction: column;
+}
+
+.container{
+    margin: 20px 30px auto;
+}
+/* -------- CSS navBar -------- */
+#navBar{
+    display: flex;
+    align-items: center ;
+    justify-content: space-between;
+
+}
+#navItem{
+    display: flex;
+    width: 20%;
+
+}
+#navBar h1{
+    font-size: 4em;
+    margin-left: 40px;
+    color: red;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+#navItem p {
+    font-size: 2em;
+    margin: 20px;
+}
+
+/* -------- CSS bestMovie -------- */
+#containerBestMovie{
+    border: 2px black solid;
+    height: 700px;
+    background-image: url();
+    background-position: top;
+    background-size:auto;
+    background-position: fixed;
+}
+#infoMmovie{
+    position: relative;
+    left: 200px;
+    top: 40%;
+    color: brown;
+}
+#infoMmovie h1{
+    font-size: 5em;
+}
+#infoMmovie p{
+    font-size: 2em;
+    margin-bottom: 10px;
+    
+}
+#infoMmovie button{
+    padding: 8px 20px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 0;
+}
+
+/* -------- CSS catégories -------- */
+#containerCarrousel{
+    height: 450px;
+      
+}
+#tilteCategorie{
+    text-align: center;
+    margin-top: 50px;
+}
+#carrousel{
+    display: flex;
+    flex-basis: 100px;
+    transition : transform 0.5s;
+
+}
+.divMovie{
+
+    background-color: red;
+    min-width: 13.8%;
+    height: 300px;
+    margin-right: 10px;
+    transition: .5s;
+}
+
+
+#movie:hover{
+    transform: scale(1.1);
+}
+
+#goRight, #goLeft {
+    width: 40px;
+    height: 40px;
+    background: #FFF url(datas/image/next-svgrepo-com.svg) center no-repeat;
+    opacity: 20%;
+    background-size: 20px 20px;
+    border-radius: 50%;
+    top: 50%;
+    cursor: pointer;
+    transition: 0.5s;
+}
+#goLeft {
+    background: #FFF url(datas/image/previous-svgrepo-com.svg) center no-repeat;
+}
+
+#goRight:hover, #goLeft:hover {
+    transform: scale(1.2);
+}
+    
+
+
