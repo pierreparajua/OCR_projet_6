@@ -7,8 +7,6 @@ body{
     background-color: rgb(25, 25, 25);
     color: white;
     font-family: 'BebasNeue-Regular';
-    display: flex;
-    flex-direction: column;
 }
 
 .container{
@@ -40,18 +38,21 @@ body{
 
 /* -------- CSS bestMovie -------- */
 #containerBestMovie{
+    display: flex;
     border: 2px black solid;
-    height: 700px;
-    background-image: url();
-    background-position: top;
-    background-size:auto;
-    background-position: fixed;
+
+
+}
+
+#imgBestMovie{
+    width: 50%;
+    margin-left: 100px;
+
 }
 #infoMmovie{
-    position: relative;
-    left: 200px;
-    top: 40%;
     color: brown;
+    margin-left: 100px;
+
 }
 #infoMmovie h1{
     font-size: 5em;
@@ -70,7 +71,8 @@ body{
 
 /* -------- CSS catégories -------- */
 #containerCarrousel{
-    height: 450px;
+    position: relative;
+    height: auto;
       
 }
 #tilteCategorie{
@@ -78,17 +80,26 @@ body{
     margin-top: 50px;
 }
 #carrousel{
+    transition : transform 0.5s; 
+    border: 2px red solid;
     display: flex;
-    flex-basis: 100px;
-    transition : transform 0.5s;
+    overflow: hidden;
 
 }
-.divMovie{
+#divMovie{
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 20%;
+    min-width: 320px;
+    background-size: cover;
+    background-position: center;
+    width: 200px;
+    height: 450px;
+    margin-left: 4%;
     
-    min-width: 13.8%;
-    height: 300px;
-    margin-right: 10px;
     transition: .5s;
+
+    
 }
 
 
@@ -97,6 +108,9 @@ body{
 }
 
 #goRight, #goLeft {
+    position: absolute;
+    right: 3%;
+    bottom: 50%;
     width: 40px;
     height: 40px;
     background: #FFF url(datas/image/next-svgrepo-com.svg) center no-repeat;
@@ -109,6 +123,8 @@ body{
 }
 #goLeft {
     background: #FFF url(datas/image/previous-svgrepo-com.svg) center no-repeat;
+    left: 3%;
+    bottom: 50%;
 }
 
 #goRight:hover, #goLeft:hover {
