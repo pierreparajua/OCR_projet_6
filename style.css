@@ -70,7 +70,7 @@ body{
 }
 
 /* -------- CSS catégories -------- */
-#containerCarrousel{
+.containerCarrousel{
     position: relative;
     height: auto;
       
@@ -79,11 +79,9 @@ body{
     text-align: center;
     margin-top: 50px;
 }
-#carrousel{
-    transition : transform 0.5s; 
-    border: 2px red solid;
+.carrousel{
     display: flex;
-    overflow: hidden;
+    transition : transform 0.5s; 
 
 }
 #divMovie{
