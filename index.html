@@ -8,7 +8,17 @@
     <script src ="js/displayMovies.js" async></script>
     <title>JustStreamIt</title>
 </head>
+
 <body id="mainPage">
+    <div class="modalContainer">
+        <div class="modalOverlay"></div>
+        <div class="modal">
+            <button class="closeModal">X</button>
+            <h1>Titre film</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, aliquid minus magni earum recusandae totam minima, mollitia esse distinctio dolorem rem quod asperiores voluptates est in natus non fuga placeat!</p>
+        </div>
+    </div>
+
     <nav id="navBar" class="container">
         <h1>JustStreamIt</h1>
         <div id="navItem">
@@ -16,12 +26,13 @@
             <p>Catégories</p>
         </div>
     </nav>
+
     <div id="containerBestMovie" class="container">
         <div id="infoMmovie">
-                    <h1 id="title">Matrix 4</h1>
+                    <h1 id="title"></h1>
                     <button id="play">Play</button>
                     <button id="moreInfo">More info</button>
-                    <p id="description">LE retour de Matrix</p>
+                    <p id="description"></p>
         </div>
     </div>
     <div id="allCarrousels" class="container">

@@ -10,13 +10,12 @@ const urlAnimation = "http://localhost:8000/api/v1/titles/?genre=animation&sort_
 
 
 
-
-
 function main() {
     displayMovieByCategory(urlBestRanking, "Films les mieux notés", "bestMovies");
     displayMovieByCategory(urlAction, "films d' action", "actionMovies");
     displayMovieByCategory(urlComedy, "comedies", "comedyMovies");
     displayMovieByCategory(urlAnimation, "films d animation", "animationMovies");  
+    
 }
 main()
 window.onresize = resizeHeightMovies
@@ -45,12 +44,6 @@ function displayBestMovie(movie) {
     getDescriptionForBestMovie(movie.id)
 }
 
-function createDiv(id) {
-    let div = document.createElement('div');
-    div.setAttribute('id', id);
-    return div
-}
-
 function createCaroussel(movies, category, containerCarrousselId) {
     let containerCarrousel = createDiv(containerCarrousselId)
     document.querySelector("#allCarrousels").append(containerCarrousel)
@@ -73,6 +66,11 @@ function createCaroussel(movies, category, containerCarrousselId) {
         imgMovie.style.backgroundImage ="url(" + movie.image_url + ")";
         document.querySelector("#carrousel__" + containerCarrousselId).append(imgMovie);
         imgMovie.style.height = imgMovie.offsetWidth * 1.472 + "px";
+        imgMovie.onclick = function(){
+            let modalContainer = document.querySelector(".modalContainer");
+            modalContainer.style.display = "block";
+            modalContainer.style.zIndex = "+1";
+        }
     })
 
     let startPosition = 0
@@ -91,14 +89,12 @@ function createCaroussel(movies, category, containerCarrousselId) {
         if (startPosition < 0) 
             startPosition++;
         carrousel.style.transform="translate(" + startPosition * 24 +"%)";
-        console.log(startPosition)
         hiddenButton()}
 
     rightButton.onclick = function() {
         if (startPosition > -nbrMoviesToDisplay + 4) 
             startPosition-- 
         carrousel.style.transform="translate(" + startPosition * 24 +"%)"
-        console.log(startPosition)
         hiddenButton()}
 
     function hiddenButton() {
@@ -113,6 +109,12 @@ function createCaroussel(movies, category, containerCarrousselId) {
             leftButton.style.visibility = "visible";
     }
     
+}
+
+function createDiv(id) {
+    let div = document.createElement('div');
+    div.setAttribute('id', id);
+    return div
 }
 
 function resizeHeightMovies() {
@@ -131,4 +133,13 @@ async function getDescriptionForBestMovie(id){
         let data =   await requete.json();
         document.querySelector("#description").textContent = data.description 
     }
+}
+
+
+let closeModal = document.querySelector(".closeModal")
+closeModal.onclick = function () {
+    let modalContainer = document.querySelector(".modalContainer");
+            modalContainer.style.display = "none";
+            modalContainer.style.zIndex = "-1";
+
 }
