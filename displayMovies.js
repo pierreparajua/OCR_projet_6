@@ -6,19 +6,19 @@ const urlGenre = 'http://localhost:8000/api/v1/genres'
 const urlBestRanking = "http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&page_size=" + (nbrMoviesToDisplay + 1)
 const urlAction = "http://localhost:8000/api/v1/titles/?genre=action&sort_by=-imdb_score&page_size=" + nbrMoviesToDisplay 
 const urlComedy = "http://localhost:8000/api/v1/titles/?genre=comedy&sort_by=-imdb_score&page_size=" + nbrMoviesToDisplay
-const urlAnimation = "http://localhost:8000/api/v1/titles/?genre=animation&sort_by=-imdb_score&page_size=" + nbrMoviesToDisplay
-
+const urlHistory = "http://localhost:8000/api/v1/titles/?genre=history&sort_by=-imdb_score&page_size=" + nbrMoviesToDisplay
 
 
 function main() {
-    displayMovieByCategory(urlBestRanking, "Films les mieux notés", "bestMovies");
     displayMovieByCategory(urlAction, "films d' action", "actionMovies");
     displayMovieByCategory(urlComedy, "comedies", "comedyMovies");
-    displayMovieByCategory(urlAnimation, "films d animation", "animationMovies");  
+    displayMovieByCategory(urlHistory, "films historique", "historyMovies");
+    displayMovieByCategory(urlBestRanking, "Films les mieux notés", "bestMovies");  
     
 }
 main()
 window.onresize = resizeHeightMovies
+
 
 
 async function displayMovieByCategory(url, catégory, divName){
@@ -29,7 +29,7 @@ async function displayMovieByCategory(url, catégory, divName){
         data = data.results;
         if (url == urlBestRanking) {
             displayBestMovie(data[0]);
-            createCaroussel(data.slice(1, 8), catégory, divName)}
+            createCaroussel(data.slice(1, (nbrMoviesToDisplay + 1)), catégory, divName)}
         else 
             createCaroussel(data, catégory, divName)
     }
@@ -41,8 +41,26 @@ function displayBestMovie(movie) {
     document.querySelector("#containerBestMovie").append(bestMovie);
     bestMovie.style.height = bestMovie.offsetWidth * 1.472 + "px"
     document.querySelector("#title").textContent = movie.title
-    getDescriptionForBestMovie(movie.id)
+    getInfosForBestMovie(movie.id)
+    let btnMoreInfo = document.querySelector("#moreInfo")
+    btnMoreInfo.onclick = function(){
+        let modalContainer = document.querySelector(".modalContainer");
+        modalContainer.style.display = "block";
+        modalContainer.style.zIndex = "+1";
+        getInfosForModal(movie.id)
+    }
 }
+
+async function getInfosForBestMovie(id){
+    const requete = await fetch((urlTitle + "/" + id), {method: 'GET'});
+    if (!requete.ok) {alert("Erreur de connexion")}
+    else { 
+        let data =   await requete.json();
+        document.querySelector("#description").textContent = data.description 
+    }
+}
+
+
 
 function createCaroussel(movies, category, containerCarrousselId) {
     let containerCarrousel = createDiv(containerCarrousselId)
@@ -70,6 +88,7 @@ function createCaroussel(movies, category, containerCarrousselId) {
             let modalContainer = document.querySelector(".modalContainer");
             modalContainer.style.display = "block";
             modalContainer.style.zIndex = "+1";
+            getInfosForModal(movie.id)
         }
     })
 
@@ -126,14 +145,7 @@ function resizeHeightMovies() {
 }
 
 
-async function getDescriptionForBestMovie(id){
-    const requete = await fetch((urlTitle + "/" + id), {method: 'GET'});
-    if (!requete.ok) {alert("Erreur de connexion")}
-    else { 
-        let data =   await requete.json();
-        document.querySelector("#description").textContent = data.description 
-    }
-}
+
 
 
 let closeModal = document.querySelector(".closeModal")
@@ -142,4 +154,25 @@ closeModal.onclick = function () {
             modalContainer.style.display = "none";
             modalContainer.style.zIndex = "-1";
 
+}
+
+
+async function getInfosForModal(id){
+    const requete = await fetch((urlTitle + "/" + id), {method: 'GET'});
+    if (!requete.ok) {alert("Erreur de connexion")}
+    else { 
+        let data =   await requete.json();
+        document.querySelector(".mainTitle").textContent =data.original_title
+        document.querySelector(".title").textContent = "Titre: "+  data.title
+        document.querySelector(".genres").textContent = "Genre: " + data.genres
+        document.querySelector(".date").textContent = "Date de sorie: " + data.date_published
+        document.querySelector(".rated").textContent = "Rated: " + data.votes
+        document.querySelector(".imdb").textContent = "Score Imdb: " + data.imdb_score
+        document.querySelector(".director").textContent = "Réalisateur: " + data.directors 
+        document.querySelector(".actors").textContent = "Liste des acteurs: " + data.actors
+        document.querySelector(".duration").textContent = "Durée: " + data.duration
+        document.querySelector(".countries").textContent = "Pays d’origine: " + data.countries
+        document.querySelector(".boxOffice").textContent = "résultat au Box Office: " + data.budget
+        document.querySelector(".longDescription").textContent = "résumé du film: " + data.long_description
+    }
 }
