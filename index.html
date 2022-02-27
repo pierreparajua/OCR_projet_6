@@ -5,11 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <script src ="js/displayMovies.js" async></script>
+    <script type="module" src ="js/main.js" async></script>
     <title>JustStreamIt</title>
 </head>
 
-<body id="mainPage">
+<body>
+    <nav id="navBar" class="container">
+        <h1>JustStreamIt</h1>
+        <div class="navItem">
+            <p>Acceuil</p>
+            <p>Catégories</p>
+        </div>
+    </nav>
+
+    <header id="containerBestMovie" class="container">
+        <div class="infoMmovie">
+                    <h1 id="title"></h1>
+                    <button> Play</button>
+                    <button id="moreInfo">More info</button>
+                    <p id="description"></p>
+        </div>
+    </header>
+    <main id="allCarrousels" class="container">
+    </main>
     <div class="modalContainer">
         <div class="modalOverlay"></div>
         <div class="modal">
@@ -27,24 +45,6 @@
             <p class="boxOffice">tiitre</p>
             <p class="longDescription">tiitre</p>
         </div>
-    </div>
-
-    <nav id="navBar" class="container">
-        <h1>JustStreamIt</h1>
-        <div id="navItem">
-            <p>Acceuil</p>
-            <p>Catégories</p>
-        </div>
-    </nav>
-
-    <div id="containerBestMovie" class="container">
-        <div id="infoMmovie">
-                    <h1 id="title"></h1>
-                    <button id="moreInfo">More info</button>
-                    <p id="description"></p>
-        </div>
-    </div>
-    <div id="allCarrousels" class="container">
     </div>   
 </body>
 </html>
