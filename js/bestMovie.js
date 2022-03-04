@@ -14,9 +14,14 @@ export function displayBestMovie(movie) {
     document.querySelector("#title").textContent = movie.title
     getInfosForBestMovie(movie.id)
     let btnMoreInfo = document.querySelector("#moreInfo")
+    let modalContainer = document.querySelector(".modalContainer");
 
     btnMoreInfo.onclick = function(){
-        let modalContainer = document.querySelector(".modalContainer");
+        modalContainer.style.display = "block";
+        modalContainer.style.zIndex = "+1";
+        getInfosForModal(movie.id)
+    }
+    bestMovie.onclick = function(){
         modalContainer.style.display = "block";
         modalContainer.style.zIndex = "+1";
         getInfosForModal(movie.id)

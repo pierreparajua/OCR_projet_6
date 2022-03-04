@@ -1,7 +1,7 @@
 
 import {displayBestMovie} from './bestMovie.js'
-import {createCaroussel} from './caroussel.js'
-import {resizeHeightMovies} from './caroussel.js';
+import {createCarrousel} from './carrousel.js'
+import {resizeHeightMovies} from './carrousel.js';
 
 
 export const nbrMoviesToDisplay = 7
@@ -29,16 +29,16 @@ async function getData(url){
 
 
 let bestMovies = await getData(urlBestRanking)
+displayBestMovie(bestMovies[0])
+createCarrousel(bestMovies, "Films les mieux notés", "bestMovies")
+
 let historyMovies = await getData(urlHistory)
 let actionMovies = await getData(urlAction)
 let comedyMovies = await getData(urlComedy)
 
-displayBestMovie(bestMovies[0])
-
-createCaroussel(bestMovies, "Films les mieux notés", "bestMovies")
-createCaroussel(historyMovies, "Films historique", "historyvies")
-createCaroussel(actionMovies, "Films d' action", "actionMovies")
-createCaroussel(comedyMovies, "Films comique", "comedyMovies")
+createCarrousel(historyMovies, "Films historique", "historyvies")
+createCarrousel(actionMovies, "Films d' action", "actionMovies")
+createCarrousel(comedyMovies, "Films comique", "comedyMovies")
 window.onresize = resizeHeightMovies
 
 
